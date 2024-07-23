@@ -1,6 +1,6 @@
 __author__ = "Lukas Mahler"
 __version__ = "0.0.0"
-__date__ = "20.07.2024"
+__date__ = "23.07.2024"
 __email__ = "m@hler.eu"
 __status__ = "Development"
 
@@ -36,7 +36,7 @@ def _gen_from_datablock(data: CEconItemPreviewDataBlock) -> Optional[str]:
 
 def _build_gen_string(data: dict[str, Any], stickers: list[dict[str, Any]]) -> str:
     """Build the item data string from the given data and stickers"""
-    str_gen = f"!gen {data['defindex']} {data['paintindex']} {data['paintseed']} {data['paintwear']}"
+    str_gen = f"{data['defindex']} {data['paintindex']} {data['paintseed']} {data['paintwear']}"
 
     sorted_stickers = sorted(stickers, key=lambda s: s['slot'])
     if stickers:
@@ -70,12 +70,12 @@ def link(data: Union[dict[str, Any], CEconItemPreviewDataBlock]) -> Optional[str
     return None
 
 
-def gen(data: Union[dict[str, Any], CEconItemPreviewDataBlock]) -> Optional[str]:
+def gen(data: Union[dict[str, Any], CEconItemPreviewDataBlock], prefix: str = "!gen") -> Optional[str]:
     """Generate a gen command string for the given item"""
     if isinstance(data, dict):
-        return _gen_from_dict(data)
+        return f"{prefix} {_gen_from_dict(data)}"
     elif isinstance(data, CEconItemPreviewDataBlock):
-        return _gen_from_datablock(data)
+        return f"{prefix} {_gen_from_datablock(data)}"
     return None
 
 
