@@ -83,7 +83,7 @@ def link_masked(data_block: CEconItemPreviewDataBlock) -> Optional[str]:
     """Generate a masked inspect link from the given data block"""
     hex_string = to_hex(data_block)
     inspect_link = f"{INSPECT_BASE}{hex_string}"
-    return inspect_link if is_valid_inspection_link(inspect_link, link_type="masked") else None
+    return inspect_link if is_link_valid(inspect_link, link_type="masked") else None
 
 
 def link_unmasked(asset_id: str, class_id: str,
@@ -91,10 +91,10 @@ def link_unmasked(asset_id: str, class_id: str,
     """Generate an unmasked inspect link from the given asset and class id and either the owner or the market id"""
     location = f"M{market_id}" if market_id else f"S{owner_id}"
     inspect_link = f"{INSPECT_BASE}{location}A{asset_id}D{class_id}"
-    return inspect_link if is_valid_inspection_link(inspect_link) else None
+    return inspect_link if is_link_valid(inspect_link) else None
 
 
-def is_valid_inspection_link(inspect: str, link_type: str = "unmasked") -> bool:
+def is_link_valid(inspect: str, link_type: str = "unmasked") -> bool:
     """Validate a given inspect link"""
     if link_type == "unmasked":
         pattern = re.compile(r"^steam://rungame/730/\d+/[+ ]csgo_econ_action_preview%20([SM])(\d+)A(\d+)D(\d+)$")
