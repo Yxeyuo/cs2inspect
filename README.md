@@ -28,9 +28,7 @@
 ## Installation
 
 ```bash
-git clone https://github.com/Helyux/cs2inspect.git
-cd cs2inspect
-pip install -r requirements.txt
+pip install cs2inspect
 ```
 
 ## Example usage
