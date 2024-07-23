@@ -7,7 +7,6 @@ build/
 dist/
 .cache/
 *.egg-info
-poetry.lock
 .vscode
 .python-version
 .idea/
