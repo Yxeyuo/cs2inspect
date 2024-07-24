@@ -4,7 +4,7 @@ version = "0.1.1"
 description = "CS2 inspect link utility"
 authors = ["Lukas Mahler <m@hler.eu>"]
 readme = "README.md"
-license = {file = "LICENSE"}
+license = "GPL-3.0-or-later"
 repository = "https://github.com/Helyux/cs2inspect"
 classifiers=[
     "Programming Language :: Python :: 3",
