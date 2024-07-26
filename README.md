@@ -77,7 +77,7 @@ print(gen_str)   # = !g 7 941 2 0.22540508210659027 7203 0.0
 Contributions are welcome! Open an issue or submit a pull request.
 
 ## License
-MIT License. See the LICENSE file for details.
+GPLv3 License. See the LICENSE file for details.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
