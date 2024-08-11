@@ -1,13 +1,14 @@
 __author__ = "Lukas Mahler"
 __version__ = "0.0.0"
-__date__ = "23.07.2024"
+__date__ = "11.08.2024"
 __email__ = "m@hler.eu"
 __status__ = "Development"
 
-import re
+
 from typing import Any, Optional, Union
 
 from cs2inspect._hex import bytes_to_float, to_hex
+from cs2inspect._link_util import is_link_valid
 from cs2inspect.econ_pb2 import CEconItemPreviewDataBlock
 
 INSPECT_BASE = "steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20"
@@ -83,7 +84,7 @@ def link_masked(data_block: CEconItemPreviewDataBlock) -> Optional[str]:
     """Generate a masked inspect link from the given data block"""
     hex_string = to_hex(data_block)
     inspect_link = f"{INSPECT_BASE}{hex_string}"
-    return inspect_link if is_link_valid(inspect_link, link_type="masked") else None
+    return inspect_link if is_link_valid(inspect_link)[0] else None
 
 
 def link_unmasked(asset_id: str, class_id: str,
@@ -91,18 +92,7 @@ def link_unmasked(asset_id: str, class_id: str,
     """Generate an unmasked inspect link from the given asset and class id and either the owner or the market id"""
     location = f"M{market_id}" if market_id else f"S{owner_id}"
     inspect_link = f"{INSPECT_BASE}{location}A{asset_id}D{class_id}"
-    return inspect_link if is_link_valid(inspect_link) else None
-
-
-def is_link_valid(inspect: str, link_type: str = "unmasked") -> bool:
-    """Validate a given inspect link"""
-    if link_type == "unmasked":
-        pattern = re.compile(r"^steam://rungame/730/\d+/[+ ]csgo_econ_action_preview%20([SM])(\d+)A(\d+)D(\d+)$")
-    elif link_type == "masked":
-        pattern = re.compile(r"^steam://rungame/730/\d+/[+ ]csgo_econ_action_preview%20[0-9a-fA-F]+$")
-    else:
-        return False
-    return bool(pattern.search(inspect))
+    return inspect_link if is_link_valid(inspect_link)[0] else None
 
 
 if __name__ == '__main__':
