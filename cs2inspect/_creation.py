@@ -92,7 +92,7 @@ def link_unmasked(asset_id: str, class_id: str,
     """Generate an unmasked inspect link from the given asset and class id and either the owner or the market id"""
     location = f"M{market_id}" if market_id else f"S{owner_id}"
     inspect_link = f"{INSPECT_BASE}{location}A{asset_id}D{class_id}"
-    return inspect_link if is_link_valid(inspect_link)[0] else None
+    return inspect_link if is_link_valid(inspect_link) else None
 
 
 if __name__ == '__main__':
